@@ -38,6 +38,7 @@ pipeline {
                         rm -f Deployment/deploy.yaml.tmp
                         kubectl apply -f Deployment
                     """
+                }
             }
         }
     }
