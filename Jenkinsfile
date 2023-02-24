@@ -24,7 +24,8 @@ pipeline {
             steps 
             {
                     sh """
-                       ls
+                       kubectl get ns
+
                     """
                 }
             }
