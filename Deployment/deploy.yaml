@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: final-project-app
+  labels:
+    app: project-app-iti
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project-app-iti
+  template:
+    metadata:
+      labels:
+        app: project-app-iti
+    spec:
+      containers:
+      - image: gcr.io/moelzedy/app:${BUILD_NUMBER}
+        name: project-app-iti
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources: {}
