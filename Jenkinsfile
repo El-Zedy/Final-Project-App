@@ -15,9 +15,19 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
+                    def namespace = "app-ns"
+                    def namespaceExists = sh(returnStdout: true, script: "kubectl get ns | grep ${namespace} | wc -l").trim()
+                    if (namespaceExists == "1") {
+                        echo "Namespace ${namespace} already exists, skipping creation step."
+                    } else {
+                        sh "kubectl create namespace ${namespace}"
+                    }
                     sh    """
-                        kubectl apply -f deployment.yaml
-                        kubectl apply -f service.yaml
+                        export BUILD_NUMBER=\$(cat ../proj-build-number.txt)
+                        mv Deployment/deploy.yaml Deployment/deploy.yaml.tmp
+                        cat Deployment/deploy.yaml.tmp | envsubst > Deployment/deploy.yaml
+                        rm -f Deployment/deploy.yaml.tmp
+                        kubectl apply -f Deployment
                     """
                 }
             }
