@@ -6,7 +6,7 @@ pipeline {
                 script {
                     sh   """
                         docker build -t gcr.io/moelzedy/app:${BUILD_NUMBER} .
-                        docker push gcr.io/moelzedy/app${BUILD_NUMBER}
+                        docker push gcr.io/moelzedy/app:${BUILD_NUMBER}
                         echo ${BUILD_NUMBER} > ../proj-build-number.txt
                     """
                 }
