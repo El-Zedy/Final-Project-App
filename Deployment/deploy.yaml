@@ -16,7 +16,7 @@ spec:
         app: project-app-iti
     spec:
       containers:
-      - image: gcr.io/moelzedy/app:${BUILD_NUMBER}
+      - image: moelzedy/app:${BUILD_NUMBER}
         name: project-app-iti
         imagePullPolicy: Always
         ports:
