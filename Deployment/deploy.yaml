@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: final-project-app
+  namespace: app-ns
   labels:
     app: project-app-iti
 spec:
